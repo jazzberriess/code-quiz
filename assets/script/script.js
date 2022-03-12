@@ -114,11 +114,11 @@ startButton.addEventListener("click", function () {
     for (let i = 0; i < quizAnswers.length; i++)
         console.log(theQuestions[i]);
 
-
-    let element = document.createElement("button");
-    element.append(quizAnswers);
-    questions.appendChild(element);
-
+    for (let i = 0; i < quizAnswers.length; i++) {
+        let element = document.createElement("button");
+        element.append(quizAnswers[i]);
+        questions.appendChild(element);
+    }
 
     console.log(quizAnswers);
 
