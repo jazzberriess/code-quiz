@@ -5,29 +5,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/css/reset.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
     <title>Document</title>
 </head>
+<header>
+    <nav class>
+        <ul class="li-wrapper">
+            <li class="li-flex-1">View High Scores</li>
+            <li class="li-flex-2">Quit</li>
+        </ul>
+    </nav>
+</header>
 
 <body>
     <section>
         <div class="flex-container">
-            <div class="flex-items">
+            <div class="questions">
                 <h1>Code Quiz</h1>
+                <!-- <div class="decorative-separator" role="none"></div> -->
                 <p>Test your skills with this Code Quiz!</p>
-                <p>Try to beat the timer and get the highest score. Incorrect answers will decrease the time an extra 10
+                <p>Try to beat the timer and get the highest score. Incorrect answers will <span
+                        id="decrease">decrease</span> the time an extra 10
                     seconds.</p>
                 <p>Good luck!</p>
-                <button>Start Quiz</button>
+                <button id="start-quiz">Start Quiz</button>
+            </div>
+            <div class="timer">
+                <div class="timer-text">
+
+                    <h3>Time Left: </h3>
+
+                    <svg aria-hidden="true">
+                        <circle cx="50%" cy="50%" r="68" />
+                        <text x="50%" y="58%" class="timer-count"> 100 </text>
+                    </svg>
+
+                    <p>seconds</p>
+
+                </div>
             </div>
         </div>
     </section>
-    <section>
-        <div class="timer">
-            <h2>Time Left:</h2><span id="time-left">100</span> Seconds
-        </div>
-
-    </section>
-
+    <!-- <script src="/assets/script/script.js"></script> -->
 </body>
 
 </html>

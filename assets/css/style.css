@@ -1,0 +1,190 @@
+/* styling for body and text elements in the body */
+
+body {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width: 100%;
+    
+}
+
+p #decrease {
+    font-weight: 800;
+}
+
+hr {
+    align: center;
+    width: 75%;
+}
+
+/* navigation styling and flex box*/
+
+ul {
+    list-style: none;
+    padding: 0rem;
+}
+
+li {
+    display: inline;
+    
+}
+ul.li-wrapper {
+    border: 1px solid blueviolet;
+    display: flex;
+    justify-content:space-evenly;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+}
+
+li.li-flex-1 {
+    border: 1px solid black;
+    flex: 1 0 50%;
+    text-align: left;
+}
+
+li.li-flex-2 {
+    border: 1px solid limegreen;
+    flex: 1 0 50%;
+    text-align: right;
+}
+
+div.flex-container {
+    display: flex;
+    border: 2px solid red;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    text-align: center;
+}
+
+div.questions {
+    border: 2px solid blue;
+    flex: 1 0 25%;
+    padding: 0.5rem;
+
+}
+
+/* div.decorative-separator {
+    height: 1px;
+    background-color: blue;
+    flex: 1 0 50%;
+    
+} */
+
+/* flexbox and styling for the timer */
+
+div.timer {
+    border: 2px solid green;
+    flex: 1 0 25%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  
+}
+
+div.timer-text {
+    border: 1px solid yellow;
+    flex: 1 0 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+div.timer-text h3 {
+    font-size: 2rem;
+}
+
+div.timer-text p {
+    font-size: 2rem;
+}
+
+circle {
+    fill: pink;
+    stroke: palevioletred;
+    stroke-width: 2px;
+}
+
+.timer-count {
+    font-size: 2.5rem;
+    text-anchor: middle;
+}
+
+
+div.time-left {
+    border: 2px solid orange;
+    background-color: pink;
+    flex: 1 0 33%;
+    border-radius: 50%;
+    font-size: 4rem;
+}
+
+/* button styling */
+
+button#start-quiz {
+    font-family: inherit;
+    font-size: 1.5rem;
+    border: 2px ridge palevioletred;
+    box-shadow: 0rem 0rem 0.2rem palevioletred;
+   background-color: pink;
+   padding-top: 0.5rem;
+   padding-left: 1.5rem;
+   padding-bottom: 0.5rem;
+   padding-right: 1.5rem;
+   border-radius: 1.5rem;
+}
+
+button#start-quiz:hover {
+    font-size: 1.6rem;
+}
+
+@media screen and (max-width: 992px) {
+    div.questions {
+        border: 2px solid blue;
+        flex: 1 0 25%;
+        padding: 0.5rem;
+    
+    }
+    
+    /* flexbox and styling for the timer */
+    
+    div.timer {
+        border: 2px solid green;
+        flex: 1 0 25%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    div.questions {
+        border: 2px solid blue;
+        flex: 1 0 100%;
+        padding: 0.5rem;
+    }
+    
+    /* flexbox and styling for the timer */
+    
+    div.timer {
+        border: 2px solid green;
+        flex: 1 0 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      
+    }
+
+}
