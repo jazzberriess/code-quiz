@@ -18,36 +18,43 @@
     </nav>
 </header>
 
-<body>
-    <section>
-        <div class="flex-container">
-            <div class="questions">
-                <h1>Code Quiz</h1>
-                <!-- <div class="decorative-separator" role="none"></div> -->
-                <p>Test your skills with this Code Quiz!</p>
-                <p>Try to beat the timer and get the highest score. Incorrect answers will <span
-                        id="decrease">decrease</span> the time an extra 10
-                    seconds.</p>
-                <p>Good luck!</p>
-                <button id="start-quiz">Start Quiz</button>
-            </div>
-            <div class="timer">
-                <div class="timer-text">
+<main>
 
-                    <h3>Time Left: </h3>
+    <body>
+        <section>
+            <div class="flex-container">
+                <div class="questions">
+                    <h1>Code Quiz</h1>
+                    <div class="answer-section">
+                        <p>Test your skills with this Code Quiz!</p>
+                        <p>Try to beat the timer and get the highest score. Incorrect answers will <span
+                                id="decrease">decrease</span> the time an extra 10
+                            seconds.</p>
+                        <p>Good luck!</p>
+                        <button id="start-quiz">Start Quiz</button>
+                    </div>
+                </div>
+                <div class="timer">
+                    <div class="timer-text">
 
-                    <svg aria-hidden="true">
-                        <circle cx="50%" cy="50%" r="68" />
-                        <text x="50%" y="58%" class="timer-count"> 100 </text>
-                    </svg>
+                        <h3>Time Left: </h3>
 
-                    <p>seconds</p>
+                        <svg aria-hidden="true">
+                            <circle cx="50%" cy="50%" r="68" />
+                            <text x="50%" y="58%" class="timer-count">60</text>
+                        </svg>
 
+                        <p id="seconds">seconds</p>
+
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- <script src="/assets/script/script.js"></script> -->
+        </section>
+</main>
+<footer>
+
+</footer>
+<script src="./assets/script/script.js"></script>
 </body>
 
 </html>
