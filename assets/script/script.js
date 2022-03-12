@@ -5,37 +5,36 @@ let startButton = document.querySelector("#start-quiz");
 let timerCount = document.querySelector(".timer-count");
 let seconds = document.querySelector("#seconds");
 
-let answerSection = document.querySelector(".answer-section");
-
 
 let score = 0;
-var index = 0
+var index = 0;
 
+let i = 0;
 
 let theQuestions = [
     {
         question: "This is q 1",
-        answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
+        answer: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
         correctAnswer: "Answer2",
     },
     {
         question: "This is q 2",
-        answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
+        answer: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
         correctAnswer: "Answer 4",
     },
     {
         question: "This is q 3",
-        answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
+        answer: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
         correctAnswer: "Answer 1",
     },
     {
         question: "This is q 4",
-        answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
+        answer: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
         correctAnswer: "Answer 3",
     },
     {
         question: "This is q 5",
-        answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
+        answer: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
         correctAnswer: "Answer 3",
     },
 ];
@@ -96,34 +95,32 @@ startButton.addEventListener("click", function () {
 startButton.addEventListener("click", function () {
 
     //clear the main text to make room for questions
-    document.querySelector(".questions").innerHTML = "";
+    questions.innerHTML = "";
     console.log("clearing the text");
 
     //variables for quiz questions and answers
 
     var quizQuestion = theQuestions[index].question;
-    var quizAnswers = theQuestions[index].answers;
+    var quizAnswers = theQuestions[index].answer;
 
     //show quiz question in the text area
 
-    document.querySelector(".questions").append(quizQuestion);
+    questions.append(quizQuestion);
 
     console.log("hello bees");
 
     //show the quiz answers
 
-    for (var i = 0; i < quizAnswers.length; i++)
+    for (let i = 0; i < quizAnswers.length; i++)
         console.log(theQuestions[i]);
 
-    var element = document.createElement("button");
-    // element.innerHTML = quizAnswers;
-    element.textContent = quizAnswers;
 
+    let element = document.createElement("button");
+    element.append(quizAnswers);
     questions.appendChild(element);
 
+
     console.log(quizAnswers);
-
-
 
 });
 
@@ -132,6 +129,6 @@ startButton.addEventListener("click", function () {
 
 
 
-//if answer corret, state 'correct!' and move to next question
+//if answer correct, state 'correct!' and move to next question
 
 // if answer incorrect, state 'wrong', deduct 10 seconds from timer and move to next question
