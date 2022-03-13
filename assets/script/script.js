@@ -4,19 +4,22 @@ let questions = document.querySelector(".questions");
 let startButton = document.querySelector("#start-quiz");
 let timerCount = document.querySelector(".timer-count");
 let seconds = document.querySelector("#seconds");
-let viewScores = document.querySelector(".li-flex-1")
+let viewScores = document.getElementsByClassName("li-wrapper");
 
 let score = 0;
 var index = 0;
 
-let i = 0;
+// let i = 0;
+
+let timeLeft = 1000;
 
 let userAnswer = "";
+let yourScore = document.createElement("button");
 
 //recording player Name and Score 
 
-var playerName = localStorage.getItem("PlayerName");
-var playerScore = localStorage.getItem("PlayerScore");
+// var playerName = localStorage.getItem("PlayerName");
+// var playerScore = localStorage.getItem("PlayerScore");
 
 let theQuestions = [
     {
@@ -52,29 +55,6 @@ var quizQuestion = theQuestions[index].question;
 var quizAnswers = theQuestions[index].answer;
 var quizCorrectAnswer = theQuestions[index].correctAnswer;
 
-//create a new h1 for the questions
-
-// let quizQuestion = document.createElement("h1");
-
-//text for the question
-
-// quizQuestion.textContent = "Here's a quiz question!"
-
-//create ordered list for quiz answers
-
-// let answerList = document.createElement("ol");
-// let answerLi1 = document.createElement("li");
-// let answerLi2 = document.createElement("li");
-// let answerLi3 = document.createElement("li");
-// let answerLi4 = document.createElement("li");
-
-//text for the quiz answers
-// answerLi1.textContent = "Answer 1";
-// answerLi2.textContent = "Answer 1";
-// answerLi3.textContent = "Answer 1";
-// answerLi4.textContent = "Answer 1";
-
-
 
 //start button begins timer
 
@@ -91,9 +71,6 @@ function beginQuiz() {
 
 function beginTimer() {
 
-    // function countdown() {
-
-    let timeLeft = 20;
     //count how many seconds remain
     let timeInterval = setInterval(function () {
 
@@ -120,23 +97,22 @@ function beginTimer() {
             questions.append(timeUp);
 
             // give user a button to check their score
-            let yourScore = document.createElement("button");
-            yourScore.textContent = "Find out your score";
-            questions.append(yourScore);
 
-            yourScore.addEventListener("click", checkScores);
+            scoreButton();
 
         }
     }, 1000);
-};
+}
 
-// startButton.addEventListener("click", function () {
+// give user a button to check their score
 
-//clear the main text to make room for questions
+function scoreButton() {
 
+    yourScore.textContent = "Find out your score";
+    questions.append(yourScore);
 
-//     askQuestions();
-// });
+    yourScore.addEventListener("click", checkScores);
+}
 
 function askQuestions() {
 
@@ -178,7 +154,7 @@ function askQuestions() {
 
         answerOptions.addEventListener("click", checkAnswers);
     }
-};
+}
 
 //if answer correct, state 'correct!' and move to next question
 
@@ -191,17 +167,18 @@ function checkAnswers(event) {
     if (value === "true") {
         console.log("You got it!");
         score++;
+        // questions.innerHTML = "";
     } else {
         console.log("boooo!");
-        // timerCount = -10;
+        // questions.innerHTML = "";
     }
 
     //if the index of theQuestions is less than the length of the object, ask the next question
 
-    if (index <= theQuestions.length) {
+    if (index < theQuestions.length) {
         index++;
 
-        questions.innerHTML = "";
+        // questions.innerHTML = "";
 
         askQuestions();
     } else {
@@ -210,9 +187,12 @@ function checkAnswers(event) {
         let complete = document.createElement("h2");
         complete.innerHTML = "COMPLETE!"
         questions.appendChild(complete);
-        clearInterval(timeInterval);
+        // clearInterval(timeInterval);
+
+        // give user a button to check their score
+        scoreButton();
     }
-};
+}
 
 function checkScores() {
 
@@ -226,7 +206,7 @@ function checkScores() {
 
     //your initials input field
 
-    let yourInitialsInput = document.createElement("input")
+    let yourInitialsInput = document.createElement("input");
     questions.appendChild(yourInitialsInput);
 
     //display final score
@@ -235,36 +215,55 @@ function checkScores() {
     yourScore.innerHTML = "Your Score: " + score;
     questions.appendChild(yourScore);
 
+    var playerName = yourInitialsInput.nodeValue;
+
+    var playerScore = score;
+
+    localStorage.setItem("playerName", playerName);
+
+    localStorage.setItem("playerScore", playerScore);
+
     //save name and score details
 
-    let saveName = document.createElement("button");
-    saveName.textContent = "Save name";
-    questions.appendChild(saveName);
+    let submitBtn = document.createElement("button");
+    submitBtn.textContent = "Submit";
+    questions.appendChild(submitBtn);
 
-    saveName.addEventListener("Click", function (event) {
-
+    submitBtn.addEventListener("Click", function (event) {
         event.preventDefault();
 
-        var userDetails = {
-            playerName: yourInitialsInput.value.trim(),
-            playerScore: score,
-        };
+        // var playerName = yourInitialsInput.value;
 
-        localStorage.setItem("userDetails", JSON.stringify(userDetails));
+        // var playerScore = score;
+
+        // localStorage.setItem("playerName", playerName);
+
+        // localStorage.setItem("playerScore", JSON.stringify(playerScore));
+
+        questions.innerHTML = "";
+
+        // var displayScore = document.createElement("h4");
+        // displayScore.tetContent = localStorage.getItem(playerName);
+        // displayScore.tetContent = localStorage.getItem(playerScore);
+
+        // questions.appendChild(displayScore);
+
     })
-};
-
-function viewHighScores() {
-    viewScores.addEventListener("Click"), function (event) {
-
-        event.currentTarget = viewScores;
-
-        viewScores = localStorage.getItem("userDetails");
-
-    }
 }
 
+// function viewHighScores() {
+
+//     questions.innerHTML = "";
+
+//     viewScores = localStorage.getItem("userDetails", JSON.parse(userDetails));
+
+//     let highScoreList = document.createElement("ul");
+//     highScoreList.textContent = viewScores;
+//     questions.appendChild(highScoreList);
+// };
+
 startButton.addEventListener("click", beginQuiz);
+// viewScores.addEventListener("click", viewHighScores);
 
 
 
