@@ -5,13 +5,14 @@ let startButton = document.querySelector("#start-quiz");
 let timerCount = document.querySelector(".timer-count");
 let seconds = document.querySelector("#seconds");
 let viewScores = document.getElementsByClassName("li-wrapper");
+let answerSection = document.querySelector(".answer-section");
 
 let score = 0;
 var index = 0;
 
 // let i = 0;
 
-let timeLeft = 1000;
+let timeLeft = 10;
 
 let userAnswer = "";
 let yourScore = document.createElement("button");
@@ -55,9 +56,8 @@ var quizQuestion = theQuestions[index].question;
 var quizAnswers = theQuestions[index].answer;
 var quizCorrectAnswer = theQuestions[index].correctAnswer;
 
-let questionTitle = document.querySelector(".question-title");
 
-let answerSection = document.querySelector(".answer-section");
+var currentQuestion = theQuestions[index];
 
 //start button begins timer
 
@@ -121,81 +121,53 @@ function askQuestions() {
 
     //show quiz question in the text area
 
-    questions.innerHTML = "";
-
-    // for (let index = 0; index < theQuestions.length; i++) {
+    // if (index < theQuestions.length) {
     //     quizQuestion[i]++;
-    // }
 
+    // questions.innerHTML = "";
 
     // questions.innerHTML = "";
     // console.log("clearing the text");
 
-    // questions.append(quizQuestion);
+    // for (let i = 0; i < theQuestions[index].length; i++) {
 
-    //for each q generate title and then append answers to title
 
+    // }
     var currentQuestion = theQuestions[index];
 
     console.log(currentQuestion);
 
-    questionTitle.textContent = currentQuestion.question;
-    answerSection.innerHTML = "";
+    question.textContent = currentQuestion.question;
 
-    currentQuestion.answer.forEach(function (choice) {
+    console.log(currentQuestion);
 
+    // console.log("hello bees");
+
+    //show the quiz answers
+
+    for (let i = 0; i < quizAnswers.length; i++) {
+        console.log(theQuestions[index]);
+
+        //create buttons for the answer options
         // for (let i = 0; i < quizAnswers.length; i++) {
         let answerOptions = document.createElement("button");
 
-        answerOptions.setAttribute("value", choice);
+        answerOptions.textContent = quizAnswers[i];
+        questions.appendChild(answerOptions);
 
-        answerOptions.textContent = choice;
-        answerOptions.onclick = nextQuestion;
-        answerSection.appendChild(answerOptions);
-    })
-}
+        console.log(quizAnswers);
 
-function nextQuestion() {
-    index++;
-    //add time deduction
-    //correct or incorrect guess etc
+        //check if answer is true or fales
 
-    if (index === theQuestions.length) {
-        checkAnswers();
+        if (quizAnswers[i] === quizCorrectAnswer) {
+            answerOptions.setAttribute("data-value", "true");
+        } else {
+            answerOptions.setAttribute("data-value", "false")
+        }
 
-    } else {
-        askQuestions();
+        answerOptions.addEventListener("click", checkAnswers);
     }
-
-};
-
-console.log("hello bees");
-
-//show the quiz answers
-
-// for (let i = 0; i < quizAnswers.length; i++) {
-//     console.log(theQuestions[index]);
-
-//     //create buttons for the answer options
-//     // for (let i = 0; i < quizAnswers.length; i++) {
-//     let answerOptions = document.createElement("button");
-
-//     answerOptions.append(quizAnswers[i]);
-//     questions.appendChild(answerOptions);
-
-//     console.log(quizAnswers);
-
-//check if answer is true or fales
-
-//     if (quizAnswers[i] === quizCorrectAnswer) {
-//         answerOptions.setAttribute("data-value", "true");
-//     } else {
-//         answerOptions.setAttribute("data-value", "false")
-//     }
-
-//     answerOptions.addEventListener("click", checkAnswers);
-// }
-// }
+}
 
 //if answer correct, state 'correct!' and move to next question
 
@@ -208,32 +180,76 @@ function checkAnswers(event) {
     if (value === "true") {
         console.log("You got it!");
         score++;
-        // questions.innerHTML = "";
+        nextQuestion();
     } else {
         console.log("boooo!");
-        // questions.innerHTML = "";
+        nextQuestion();
     }
 
-    //if the index of theQuestions is less than the length of the object, ask the next question
-
-    if (index < theQuestions.length) {
-        index++;
-
-        // questions.innerHTML = "";
-
-        askQuestions();
-    } else {
+    if (index === theQuestions.length) {
 
         questions.innerHTML = "";
         let complete = document.createElement("h2");
         complete.innerHTML = "COMPLETE!"
         questions.appendChild(complete);
-        // clearInterval(timeInterval);
-
-        // give user a button to check their score
-        scoreButton();
     }
+
+
+    function nextQuestion() {
+        index++;
+    }
+    //if the index of theQuestions is less than the length of the object, ask the next question
+
+    // if (index < theQuestions[index]) {
+    //     index++;
+
+    // questions.innerHTML = "";
+
+    // askQuestions();
+    // } else if
+    //     (index >= theQuestions[index]) {
+    //     questions.innerHTML = "";
+    //     let complete = document.createElement("h2");
+    //     complete.innerHTML = "COMPLETE!"
+    //     questions.appendChild(complete);
+    //     // clearInterval(timeInterval);
+
+    //     // give user a button to check their score
+    //     scoreButton();
+
+    //     if (index === theQuestions.length) {
+
+    //         questions.innerHTML = "";
+    //         let complete = document.createElement("h2");
+    //         complete.innerHTML = "COMPLETE!"
+    //         questions.appendChild(complete);
+    //     }
+    // }
+
+    //     } else if (index === theQuestions.length) {
+    //         questions.innerHTML = "";
+    //         let complete = document.createElement("h2");
+    //         complete.innerHTML = "COMPLETE!"
+    //         questions.appendChild(complete);
+    //         // clearInterval(timeInterval);
+
+    //         // give user a button to check their score
+    //         scoreButton();
+
+    //     } else {
+
+    //         questions.innerHTML = "";
+    //         let complete = document.createElement("h2");
+    //         complete.innerHTML = "COMPLETE!"
+    //         questions.appendChild(complete);
+    //         // clearInterval(timeInterval);
+
+    //         // give user a button to check their score
+    //         scoreButton();
+    //     }
+    // }
 }
+
 
 function checkScores() {
 
@@ -303,12 +319,5 @@ function checkScores() {
 //     questions.appendChild(highScoreList);
 // };
 
-
 startButton.addEventListener("click", beginQuiz);
 // viewScores.addEventListener("click", viewHighScores);
-
-
-
-
-
-

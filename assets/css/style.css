@@ -68,6 +68,13 @@ div.questions {
 
 }
 
+div.question-container {
+    border: 2px solid aqua;
+    flex: 1 0 25%;
+    padding: 0.5rem;
+
+}
+
 /* div.decorative-separator {
     height: 1px;
     background-color: blue;
