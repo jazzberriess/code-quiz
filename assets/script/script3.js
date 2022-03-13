@@ -22,7 +22,6 @@ let deduction = 5;
 // var playerName = localStorage.getItem("PlayerName");
 // var playerScore = localStorage.getItem("PlayerScore");
 
-let userDetails = [];
 
 let theQuestions = [
     {
@@ -272,43 +271,63 @@ function checkScores() {
 
     let submit = document.createElement("button");
     submit.textContent = "Submit";
+    submit.setAttribute("type", "submit");
+    submit.setAttribute("id", "submit");
     questionContainer.appendChild(submit);
 
     submit.addEventListener("click", function () {
-        // event.preventDefault();
-        console.log(yourInitialsInput);
+
+        savePlayerName();
+        showPlayerDetails();
+
+    })
+
+
+    function savePlayerName() {
+
         var userDetails = {
             playerName: document.getElementById("inputFieldName").value,
             playerScore: score,
         };
 
-        userDetails = localStorage.setItem("userDetails", JSON.stringify(userDetails));
+        localStorage.setItem("Player Details", JSON.stringify(userDetails));
         // showHighScores();
+    }
+
+    function showPlayerDetails() {
 
         questionContainer.innerHTML = "";
 
-        let listScores = document.createElement("li");
+        var playerData = JSON.parse(localStorage.getItem("Player Details"));
 
-        userDetails = JSON.parse(localStorage.getItem("userDetails"));
+        var displayData = document.createElement("h3");
+        displayData.textContent = playerData.playerName + " - " + playerData.playerScore;
+        questionContainer.appendChild(displayData);
 
-        listScores.textContent = userDetails;
-        questionContainer.appendChild(listScores);
-        console.log(userDetails);
-    })
+        // questionContainer.innerHTML = "";
+
+        // let listScores = document.createElement("li");
+
+        // listScores.textContent = userDetails;
+        // questionContainer.appendChild(listScores);
+        // console.log(userDetails);
+    }
 }
 
 // function showHighScores() {
 
-//     questionContainer.innerHTML = "";
 
-//     let listScores = document.createElement("li");
 
-//     userDetails = JSON.parse(localStorage.getItem("userDetails"));
+// questionContainer.innerHTML = "";
 
-//     listScores.textContent = userDetails;
-//     questionContainer.appendChild(listScores);
-//     console.log(userDetails);
-//     //get saved scores from local storage
+// let listScores = document.createElement("li");
+
+// userDetails = JSON.parse(localStorage.getItem("userDetails"));
+
+// listScores.textContent = userDetails;
+// questionContainer.appendChild(listScores);
+// console.log(userDetails);
+//get saved scores from local storage
 
 
 // }
