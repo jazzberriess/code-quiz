@@ -3,21 +3,26 @@
 let questions = document.querySelector(".questions");
 let startButton = document.querySelector("#start-quiz");
 let timerCount = document.querySelector(".timer-count");
+let timerContainer = document.querySelector(".timer");
 let seconds = document.querySelector("#seconds");
-let viewScores = document.querySelector(".li-flex-1")
+let viewScores = document.querySelector(".li-flex-1");
 let questionContainer = document.querySelector(".question-container");
 
 let score = 0;
-var index = 0;
-
+let index = 0;
 let i = 0;
 
-let userAnswer = "";
+let timeLeft = 60;
+let deduction = 5;
+
+// let userAnswer = "";
 
 //recording player Name and Score 
 
-var playerName = localStorage.getItem("PlayerName");
-var playerScore = localStorage.getItem("PlayerScore");
+// var playerName = localStorage.getItem("PlayerName");
+// var playerScore = localStorage.getItem("PlayerScore");
+
+let userDetails = [];
 
 let theQuestions = [
     {
@@ -49,9 +54,9 @@ let theQuestions = [
 
 //variables for quiz questions and answers
 
-var quizQuestion = theQuestions[index].question;
-var quizAnswers = theQuestions[index].answer;
-var quizCorrectAnswer = theQuestions[index].correctAnswer;
+let quizQuestion = theQuestions[index].question;
+let quizAnswers = theQuestions[index].answer;
+let quizCorrectAnswer = theQuestions[index].correctAnswer;
 
 
 //create a new h1 for the questions
@@ -95,7 +100,6 @@ function beginTimer() {
 
     // function countdown() {
 
-    let timeLeft = 3;
     //count how many seconds remain
     let timeInterval = setInterval(function () {
 
@@ -105,12 +109,17 @@ function beginTimer() {
             timerCount.textContent = timeLeft--;
 
             //if time left is 1 second, change the word 'seconds' to 'second'
-        } else if (timeLeft === 1) {
+        }
+        else if (timeLeft === 1) {
             timerCount.textContent = timeLeft--;
             seconds.textContent = "second";
 
             //if time left is zero, clear the counter
-        } else {
+        } else if
+            (index >= theQuestions.length) {
+            clearInterval(timeInterval);
+        }
+        else {
             timerCount.textContent = "0";
             seconds.textContent = "seconds";
             clearInterval(timeInterval);
@@ -142,28 +151,48 @@ function beginTimer() {
 
 function askQuestions() {
 
-    questionContainer.innerHTML = "";
+    //clear text area and hide initial info box
 
-    //show quiz question in the text area
+    questionContainer.innerHTML = "";
 
     questions.style.display = "none";
     questionContainer.style.display = "block";
 
-    var quizQuestion = theQuestions[index].question;
-    var quizAnswers = theQuestions[index].answer;
+    //if there are no more questions to ask, show COMPLETE and stop the timer
 
-    questionContainer.append(quizQuestion);
+    if (index >= theQuestions.length) {
+
+        let complete = document.createElement("h2");
+        complete.textContent = "COMPLETE!"
+        questionContainer.appendChild(complete);
+        timeLeft = 0;
+        let goToScores = document.createElement("button");
+        goToScores.textContent = "Show Score";
+        questionContainer.appendChild(goToScores);
+
+        goToScores.addEventListener("click", checkScores);
+
+    }
+
+    //show quiz questions in the text area
+
+    let quizQuestion = theQuestions[index].question;
+    let quizAnswers = theQuestions[index].answer;
+
+    let viewQuestion = document.createElement("h2");
+    viewQuestion.textContent = quizQuestion;
+
+    questionContainer.appendChild(viewQuestion);
 
 
     console.log(quizQuestion);
 
-    //show the quiz answers
+    //show the quiz answer options as buttons
 
     for (let i = 0; i < quizAnswers.length; i++) {
         console.log(theQuestions[index]);
 
         //create buttons for the answer options
-        // for (let i = 0; i < quizAnswers.length; i++) {
         let answerOptions = document.createElement("button");
 
         answerOptions.textContent = quizAnswers[i];
@@ -171,7 +200,7 @@ function askQuestions() {
 
         console.log(quizAnswers);
 
-        //check if answer is true or fales
+        //check if answer is true or false
 
         if (quizAnswers[i] === theQuestions[index].correctAnswer) {
             answerOptions.setAttribute("data-value", "true");
@@ -180,45 +209,37 @@ function askQuestions() {
         }
 
         answerOptions.addEventListener("click", checkAnswers);
+
     }
 }
 
-//if answer correct, state 'correct!' and move to next question
-
-// if answer incorrect, state 'wrong', deduct 10 seconds from timer and move to next question
+//Check answer 
 
 function checkAnswers(event) {
 
     let value = event.target.dataset.value;
 
+    //if answer correct, state 'correct!' and move to next question
+
     if (value === "true") {
         console.log("You got it!");
         score++;
-        // questions.innerHTML = "";
-        // index++;
         nextQuestion();
+
+        // if answer incorrect, state 'wrong', deduct 10 seconds from timer and move to next question
     } else if (value === "false") {
         console.log("boooo!");
-        // timerCount = -10;
-        // index++;
+        timeLeft = timeLeft - deduction;
         nextQuestion();
     }
+}
 
-    //if the index of theQuestions is less than the length of the object, ask the next question
-    function nextQuestion() {
+//if the index of theQuestions is less than the length of the object, ask the next question
+function nextQuestion() {
 
-        if (index <= theQuestions.length) {
-            index++;
-            askQuestions();
-
-        } else {
-
-            questionContainer.innerHTML = "";
-            let complete = document.createElement("h2");
-            complete.innerHTML = "COMPLETE!"
-            questionContainer.appendChild(complete);
-            // clearInterval(timeInterval);
-        }
+    if (index <= theQuestions.length) {
+        index++;
+        askQuestions();
     }
 }
 
@@ -226,6 +247,9 @@ function checkScores() {
 
     //clear the text field
     questionContainer.innerHTML = "";
+
+    timerContainer.style.display = "none";
+
 
     //Your initials header
     let yourInitials = document.createElement("h3");
@@ -246,12 +270,11 @@ function checkScores() {
 
     //save name and score details
 
-    let saveName = document.createElement("button");
-    saveName.textContent = "Save name";
-    questionContainer.appendChild(saveName);
+    let submit = document.createElement("button");
+    submit.textContent = "Submit";
+    questionContainer.appendChild(submit);
 
-    saveName.addEventListener("click", function () {
-        debugger;
+    submit.addEventListener("click", function () {
         // event.preventDefault();
         console.log(yourInitialsInput);
         var userDetails = {
@@ -259,19 +282,47 @@ function checkScores() {
             playerScore: score,
         };
 
-        localStorage.setItem("userDetails", JSON.stringify(userDetails));
+        userDetails = localStorage.setItem("userDetails", JSON.stringify(userDetails));
+        // showHighScores();
+
+        questionContainer.innerHTML = "";
+
+        let listScores = document.createElement("li");
+
+        userDetails = JSON.parse(localStorage.getItem("userDetails"));
+
+        listScores.textContent = userDetails;
+        questionContainer.appendChild(listScores);
+        console.log(userDetails);
     })
 }
 
-function viewHighScores() {
-    viewScores.addEventListener("Click"), function (event) {
+// function showHighScores() {
 
-        event.currentTarget = viewScores;
+//     questionContainer.innerHTML = "";
 
-        viewScores = localStorage.getItem("userDetails");
+//     let listScores = document.createElement("li");
 
-    }
-}
+//     userDetails = JSON.parse(localStorage.getItem("userDetails"));
+
+//     listScores.textContent = userDetails;
+//     questionContainer.appendChild(listScores);
+//     console.log(userDetails);
+//     //get saved scores from local storage
+
+
+// }
+
+// function viewHighScores() {
+
+//     viewScores.addEventListener("click"), function (event) {
+
+//         event.currentTarget = viewScores;
+
+//         viewScores = localStorage.getItem("userDetails");
+
+//     }
+// }
 
 startButton.addEventListener("click", beginQuiz);
 
