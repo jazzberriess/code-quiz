@@ -7,14 +7,15 @@ let timerContainer = document.querySelector(".timer");
 let seconds = document.querySelector("#seconds");
 let viewScores = document.querySelector("#view-high-scores");
 let questionContainer = document.querySelector(".question-container");
-let timerBg = document.querySelector("circle");
+// let timerBg = document.querySelector("circle");
 let scoreTracker = document.querySelector(".li-wrapper");
+let quizCompletedMessage = document.querySelector(".quiz-completed");
 
 let score = 0;
 let index = 0;
 let i = 0;
 
-let timeLeft = 60;
+let timeLeft = 10;
 let deduction = 5;
 
 //setting the questions
@@ -58,7 +59,7 @@ let quizCorrectAnswer = theQuestions[index].correctAnswer;
 let visitHighScores = document.createElement("li");
 let trackScore = document.createElement("li");
 
-visitHighScores.textContent = "View High Scores";
+visitHighScores.innerHTML = "View High Scores";
 trackScore.innerHTML = "Score: " + score;
 
 scoreTracker.appendChild(visitHighScores);
@@ -67,22 +68,12 @@ scoreTracker.appendChild(trackScore);
 visitHighScores.setAttribute("style", "flex: 1 0 50%; text-align: left;");
 trackScore.setAttribute("style", "flex: 1 0 50%; text-align: right");
 
+//hide the question container when viewing the game for the first time
+
+questionContainer.style.display = "none";
+quizCompletedMessage.style.display = "none";
 
 //start button begins timer
-
-function beginQuiz() {
-    // let scoreTrackerContents = document.createElement("h1");
-    // scoreTrackerContents.textContent = "Score: " + currentScore;
-    // scoreTracker.appendChild(scoreTrackerContents);
-
-    beginTimer();
-
-    // questions.innerHTML = "";
-    // console.log("clearing the text");
-
-    askQuestions();
-
-};
 
 function beginTimer() {
 
@@ -106,8 +97,8 @@ function beginTimer() {
         } else if
             (index >= theQuestions.length) {
             clearInterval(timeInterval);
-        }
-        else {
+
+        } else {
             timerCount.textContent = "0";
             seconds.textContent = "seconds";
             clearInterval(timeInterval);
@@ -120,7 +111,7 @@ function beginTimer() {
 
             // give user a button to check their score
             let yourScore = document.createElement("button");
-            yourScore.textContent = "Find out your score";
+            yourScore.textContent = "Save Your Score";
             questionContainer.append(yourScore);
 
             //styling for find out score button
@@ -151,15 +142,20 @@ function askQuestions() {
 
     //if there are no more questions to ask, show COMPLETE and stop the timer
 
-    if (index >= theQuestions.length) {
+    while (index >= theQuestions.length) {
+
+        quizCompletedMessage.style.display = "block";
+        questionContainer.style.display = "none";
 
         let complete = document.createElement("h2");
         complete.textContent = "COMPLETE!"
-        questionContainer.appendChild(complete);
+        quizCompletedMessage.appendChild(complete);
         timeLeft = 0;
+        index = 0;
+
         let goToScores = document.createElement("button");
         goToScores.textContent = "Show Score";
-        questionContainer.appendChild(goToScores);
+        quizCompletedMessage.appendChild(goToScores);
 
         //styling for the button
         goToScores.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem");
@@ -171,6 +167,8 @@ function askQuestions() {
 
     quizQuestion = theQuestions[index].question;
     quizAnswers = theQuestions[index].answer;
+    quizCorrectAnswer = theQuestions[index].correctAnswer;
+
 
     viewQuestion = document.createElement("h2");
     viewQuestion.textContent = quizQuestion;
@@ -183,7 +181,7 @@ function askQuestions() {
     //show the quiz answer options as buttons
 
     for (let i = 0; i < quizAnswers.length; i++) {
-        console.log(theQuestions[index]);
+        // console.log(theQuestions[index]);
 
         //create buttons for the answer options
         let answerOptions = document.createElement("button");
@@ -193,11 +191,12 @@ function askQuestions() {
 
         answerOptions.setAttribute("style", "display: block; width: 100%; background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem; margin-bottom: 0.5rem;");
 
+
         console.log(quizAnswers);
 
         //check if answer is true or false
 
-        if (quizAnswers[i] === theQuestions[index].correctAnswer) {
+        if (quizAnswers[i] === quizCorrectAnswer) {
             answerOptions.setAttribute("data-value", "true");
         } else {
             answerOptions.setAttribute("data-value", "false");
@@ -236,6 +235,12 @@ function nextQuestion() {
     if (index <= theQuestions.length) {
         index++;
         askQuestions();
+    } else {
+
+        // reset index to zero after game
+        index = 0;
+
+        console.log("COMPLETE");
     }
 }
 
@@ -243,6 +248,9 @@ function checkScores() {
 
     //clear the text field
     questionContainer.innerHTML = "";
+
+    quizCompletedMessage.style.display = "none";
+    questionContainer.style.display = "block";
 
     timerContainer.style.display = "none";
 
@@ -255,6 +263,7 @@ function checkScores() {
     //your initials input field
 
     let yourInitialsInput = document.createElement("input");
+    yourInitialsInput.setAttribute("type", "input");
     yourInitialsInput.setAttribute("id", "inputFieldName");
     yourInitialsInput.textContent = "";
     questionContainer.appendChild(yourInitialsInput);
@@ -283,72 +292,92 @@ function checkScores() {
         showPlayerDetails();
 
     })
-
-
-    function savePlayerName() {
-
-        var userDetails = {
-            playerName: document.getElementById("inputFieldName").value,
-            playerScore: score,
-        };
-
-        localStorage.setItem("Player Details", JSON.stringify(userDetails));
-        // showHighScores();
-    }
-
-    function showPlayerDetails() {
-
-        questionContainer.innerHTML = "";
-
-        let highScoresTitle = document.createElement("h3");
-        highScoresTitle.textContent = "High Scores";
-        questionContainer.appendChild(highScoresTitle);
-
-        var playerData = JSON.parse(localStorage.getItem("Player Details"));
-
-        var displayData = document.createElement("div");
-        displayData.textContent = "Name: " + playerData.playerName + " - Score: " + playerData.playerScore;
-        questionContainer.appendChild(displayData);
-        displayData.setAttribute("style", "background-color: mistyrose; margin-bottom: 2rem;")
-
-        var goBackBtn = document.createElement("button");
-        goBackBtn.textContent = "Go Back";
-        questionContainer.appendChild(goBackBtn);
-
-        //styling for the goBackBtn
-
-        goBackBtn.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem; mrgin-top: 1rem;");
-
-        goBackBtn.addEventListener("click", function () {
-            resetGame();
-        })
-
-        var clearScoresBtn = document.createElement("button");
-        clearScoresBtn.textContent = "Clear Score";
-        questionContainer.appendChild(clearScoresBtn);
-
-        //styling for the clear scores btn
-
-        clearScoresBtn.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem;");
-
-        // questionContainer.innerHTML = "";
-
-        // let listScores = document.createElement("li");
-
-        // listScores.textContent = userDetails;
-        // questionContainer.appendChild(listScores);
-        // console.log(userDetails);
-
-    }
 }
 
-function resetGame() {
-    questions.style.display = "block";
-    timerContainer.style.display = "block";
-    questionContainer.style.display = "none";
-    index = 0;
+function savePlayerName() {
+
+    var userDetails = {
+        playerName: document.getElementById("inputFieldName").value,
+        playerScore: score,
+    };
+
+    localStorage.setItem("Player Details", JSON.stringify(userDetails));
+    // showHighScores();
+}
+
+function showPlayerDetails() {
+
+    questionContainer.innerHTML = "";
+
+    let highScoresTitle = document.createElement("h3");
+    highScoresTitle.textContent = "High Scores";
+    questionContainer.appendChild(highScoresTitle);
+
+    var playerData = JSON.parse(localStorage.getItem("Player Details"));
+
+    var displayData = document.createElement("div");
+    displayData.textContent = "Name: " + playerData.playerName + " - Score: " + playerData.playerScore;
+    questionContainer.appendChild(displayData);
+    displayData.setAttribute("style", "background-color: mistyrose; margin-bottom: 2rem;")
+
+    var goBackBtn = document.createElement("button");
+    goBackBtn.textContent = "Go Back";
+    questionContainer.appendChild(goBackBtn);
+
+    //styling for the goBackBtn
+
+    goBackBtn.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem; mrgin-top: 1rem;");
+
+    goBackBtn.addEventListener("click", function () {
+        questions.style.display = "block";
+        timerContainer.style.display = "block";
+        questionContainer.style.display = "none";
+        quizCompletedMessage.style.display = "none";
+
+        //RESET SCORE AND INDEX TO ZERO
+        // index = 0;
+        // score = 0;
+
+        // reset timer???
+    })
+
+    var clearScoresBtn = document.createElement("button");
+    clearScoresBtn.textContent = "Clear Score";
+    questionContainer.appendChild(clearScoresBtn);
+
+    //styling for the clear scores btn
+
+    clearScoresBtn.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem;");
+
+    // questionContainer.innerHTML = "";
+
+    // let listScores = document.createElement("li");
+
+    // listScores.textContent = userDetails;
+    // questionContainer.appendChild(listScores);
+    // console.log(userDetails);
 
 }
+
+
+function beginQuiz() {
+    // let scoreTrackerContents = document.createElement("h1");
+    // scoreTrackerContents.textContent = "Score: " + currentScore;
+    // scoreTracker.appendChild(scoreTrackerContents);
+
+
+    beginTimer();
+
+    // questions.innerHTML = "";
+    // console.log("clearing the text");
+
+    askQuestions();
+
+};
+
+
+// reset index to zero after game
+// index = 0;
 
 
 // visitHighScores.addEventListener("click", function (event) {
@@ -361,15 +390,8 @@ function resetGame() {
 
 visitHighScores.addEventListener("click", function () {
     showPlayerDetails();
+
 })
 
 
 startButton.addEventListener("click", beginQuiz);
-
-
-
-
-
-
-
-
