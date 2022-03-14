@@ -37,7 +37,7 @@ ul.li-wrapper {
 
 }
 
-li.li-flex-1 {
+/* li.li-flex-1 {
     display: inline;
     border: 1px solid black;
     flex: 1 0 50%;
@@ -49,7 +49,7 @@ li.li-flex-2 {
     border: 1px solid limegreen;
     flex: 1 0 50%;
     text-align: right;
-}
+} */
 
 div.flex-container {
     display: flex;

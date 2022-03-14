@@ -5,8 +5,10 @@ let startButton = document.querySelector("#start-quiz");
 let timerCount = document.querySelector(".timer-count");
 let timerContainer = document.querySelector(".timer");
 let seconds = document.querySelector("#seconds");
-let viewScores = document.querySelector(".li-flex-1");
+let viewScores = document.querySelector("#view-high-scores");
 let questionContainer = document.querySelector(".question-container");
+let timerBg = document.querySelector("circle");
+let scoreTracker = document.querySelector(".li-wrapper");
 
 let score = 0;
 let index = 0;
@@ -15,13 +17,7 @@ let i = 0;
 let timeLeft = 60;
 let deduction = 5;
 
-// let userAnswer = "";
-
-//recording player Name and Score 
-
-// var playerName = localStorage.getItem("PlayerName");
-// var playerScore = localStorage.getItem("PlayerScore");
-
+//setting the questions
 
 let theQuestions = [
     {
@@ -57,39 +53,32 @@ let quizQuestion = theQuestions[index].question;
 let quizAnswers = theQuestions[index].answer;
 let quizCorrectAnswer = theQuestions[index].correctAnswer;
 
+//styling for the score tracker and view high scores header items. DO NOT MOVE THESE. FOR SOME REASON MOVING THEM FURTHER UP IN THE DOCUMENT MAKES THEM DISAPPEAR.
 
-//create a new h1 for the questions
+let visitHighScores = document.createElement("li");
+let trackScore = document.createElement("li");
 
-// let quizQuestion = document.createElement("h1");
+visitHighScores.textContent = "View High Scores";
+trackScore.innerHTML = "Score: " + score;
 
-//text for the question
+scoreTracker.appendChild(visitHighScores);
+scoreTracker.appendChild(trackScore);
 
-// quizQuestion.textContent = "Here's a quiz question!"
-
-//create ordered list for quiz answers
-
-// let answerList = document.createElement("ol");
-// let answerLi1 = document.createElement("li");
-// let answerLi2 = document.createElement("li");
-// let answerLi3 = document.createElement("li");
-// let answerLi4 = document.createElement("li");
-
-//text for the quiz answers
-// answerLi1.textContent = "Answer 1";
-// answerLi2.textContent = "Answer 1";
-// answerLi3.textContent = "Answer 1";
-// answerLi4.textContent = "Answer 1";
-
+visitHighScores.setAttribute("style", "flex: 1 0 50%; text-align: left;");
+trackScore.setAttribute("style", "flex: 1 0 50%; text-align: right");
 
 
 //start button begins timer
 
 function beginQuiz() {
+    // let scoreTrackerContents = document.createElement("h1");
+    // scoreTrackerContents.textContent = "Score: " + currentScore;
+    // scoreTracker.appendChild(scoreTrackerContents);
 
     beginTimer();
 
-    questions.innerHTML = "";
-    console.log("clearing the text");
+    // questions.innerHTML = "";
+    // console.log("clearing the text");
 
     askQuestions();
 
@@ -134,6 +123,9 @@ function beginTimer() {
             yourScore.textContent = "Find out your score";
             questionContainer.append(yourScore);
 
+            //styling for find out score button
+            yourScore.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem");
+
             yourScore.addEventListener("click", checkScores);
 
         }
@@ -169,16 +161,18 @@ function askQuestions() {
         goToScores.textContent = "Show Score";
         questionContainer.appendChild(goToScores);
 
-        goToScores.addEventListener("click", checkScores);
+        //styling for the button
+        goToScores.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem");
 
+        goToScores.addEventListener("click", checkScores);
     }
 
     //show quiz questions in the text area
 
-    let quizQuestion = theQuestions[index].question;
-    let quizAnswers = theQuestions[index].answer;
+    quizQuestion = theQuestions[index].question;
+    quizAnswers = theQuestions[index].answer;
 
-    let viewQuestion = document.createElement("h2");
+    viewQuestion = document.createElement("h2");
     viewQuestion.textContent = quizQuestion;
 
     questionContainer.appendChild(viewQuestion);
@@ -196,6 +190,8 @@ function askQuestions() {
 
         answerOptions.textContent = quizAnswers[i];
         questionContainer.appendChild(answerOptions);
+
+        answerOptions.setAttribute("style", "display: block; width: 100%; background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem; margin-bottom: 0.5rem;");
 
         console.log(quizAnswers);
 
@@ -223,6 +219,7 @@ function checkAnswers(event) {
     if (value === "true") {
         console.log("You got it!");
         score++;
+        trackScore.innerHTML = "Score: " + score;
         nextQuestion();
 
         // if answer incorrect, state 'wrong', deduct 10 seconds from timer and move to next question
@@ -259,6 +256,7 @@ function checkScores() {
 
     let yourInitialsInput = document.createElement("input");
     yourInitialsInput.setAttribute("id", "inputFieldName");
+    yourInitialsInput.textContent = "";
     questionContainer.appendChild(yourInitialsInput);
 
     //display final score
@@ -274,6 +272,10 @@ function checkScores() {
     submit.setAttribute("type", "submit");
     submit.setAttribute("id", "submit");
     questionContainer.appendChild(submit);
+
+    //styling for the submit button
+
+    submit.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem");
 
     submit.addEventListener("click", function () {
 
@@ -298,11 +300,36 @@ function checkScores() {
 
         questionContainer.innerHTML = "";
 
+        let highScoresTitle = document.createElement("h3");
+        highScoresTitle.textContent = "High Scores";
+        questionContainer.appendChild(highScoresTitle);
+
         var playerData = JSON.parse(localStorage.getItem("Player Details"));
 
-        var displayData = document.createElement("h3");
-        displayData.textContent = playerData.playerName + " - " + playerData.playerScore;
+        var displayData = document.createElement("div");
+        displayData.textContent = "Name: " + playerData.playerName + " - Score: " + playerData.playerScore;
         questionContainer.appendChild(displayData);
+        displayData.setAttribute("style", "background-color: mistyrose; margin-bottom: 2rem;")
+
+        var goBackBtn = document.createElement("button");
+        goBackBtn.textContent = "Go Back";
+        questionContainer.appendChild(goBackBtn);
+
+        //styling for the goBackBtn
+
+        goBackBtn.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem; mrgin-top: 1rem;");
+
+        goBackBtn.addEventListener("click", function () {
+            resetGame();
+        })
+
+        var clearScoresBtn = document.createElement("button");
+        clearScoresBtn.textContent = "Clear Score";
+        questionContainer.appendChild(clearScoresBtn);
+
+        //styling for the clear scores btn
+
+        clearScoresBtn.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem;");
 
         // questionContainer.innerHTML = "";
 
@@ -311,39 +338,37 @@ function checkScores() {
         // listScores.textContent = userDetails;
         // questionContainer.appendChild(listScores);
         // console.log(userDetails);
+
     }
 }
 
-// function showHighScores() {
+function resetGame() {
+    questions.style.display = "block";
+    timerContainer.style.display = "block";
+    questionContainer.style.display = "none";
+    index = 0;
+
+}
 
 
+// visitHighScores.addEventListener("click", function (event) {
 
-// questionContainer.innerHTML = "";
-
-// let listScores = document.createElement("li");
-
-// userDetails = JSON.parse(localStorage.getItem("userDetails"));
-
-// listScores.textContent = userDetails;
-// questionContainer.appendChild(listScores);
-// console.log(userDetails);
-//get saved scores from local storage
+//     event.target = visitHighScores;
+//     showPlayerDetails();
 
 
-// }
+// })
 
-// function viewHighScores() {
+visitHighScores.addEventListener("click", function () {
+    showPlayerDetails();
+})
 
-//     viewScores.addEventListener("click"), function (event) {
-
-//         event.currentTarget = viewScores;
-
-//         viewScores = localStorage.getItem("userDetails");
-
-//     }
-// }
 
 startButton.addEventListener("click", beginQuiz);
+
+
+
+
 
 
 

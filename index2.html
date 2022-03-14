@@ -9,22 +9,23 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <title>Document</title>
 </head>
-<header>
-    <nav class>
-        <ul class="li-wrapper">
-            <li class="li-flex-1">View High Scores</li>
-            <li class="li-flex-2">Quit</li>
-        </ul>
-    </nav>
-</header>
 
-<main>
+<body>
+    <header>
+        <div>
+            <ul class="li-wrapper">
 
-    <body>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+
+
         <section>
             <div class="flex-container">
                 <div class="questions">
-                    <h1>Code Quiz</h1>
+                    <h1 id="codequiz">Code Quiz</h1>
                     <div class="answer-section">
                         <p>Test your skills with this Code Quiz!</p>
                         <p>Try to beat the timer and get the highest score. Incorrect answers will <span
@@ -41,8 +42,8 @@
                         <h3>Time Left: </h3>
 
                         <svg aria-hidden="true">
-                            <circle cx="50%" cy="50%" r="68" />
-                            <text x="50%" y="58%" class="timer-count">10</text>
+                            <circle id="timer-background" cx="50%" cy="50%" r="68" />
+                            <text x="50%" y="58%" class="timer-count">60</text>
                         </svg>
 
                         <p id="seconds">seconds</p>
@@ -51,11 +52,11 @@
                 </div>
             </div>
         </section>
-</main>
-<footer>
+    </main>
+    <footer>
 
-</footer>
-<script src="./assets/script/script3.js"></script>
+    </footer>
+    <script src="./assets/script/script3.js"></script>
 </body>
 
 </html>

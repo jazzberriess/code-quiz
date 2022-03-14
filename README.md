@@ -14,5 +14,7 @@ The following websites were invaluable in my quest for knowledge and troubleshoo
 [Stack Overflow: How to clear an .appendChild in JavaScript](https://stackoverflow.com/questions/57514020/how-to-clear-an-appendchild-in-javascript)
 [Simple Javascript Quiz](https://www.sitepoint.com/simple-javascript-quiz/)
 
+[Stack Overflow: Score Counter](https://stackoverflow.com/questions/26125762/i-need-a-javascript-round-counter-and-score-counter-for-my-game_)
+
 Mozilla Developer Network
 W3 Schools
