@@ -426,7 +426,7 @@ function beginTimer() {
     // function countdown() {
     let timer;
     //count how many seconds remain
-    timer = setInterval(function () {
+    function countdownTimer() {
 
         //if time left is greater than 1, count down and display tramining time.
 
@@ -466,7 +466,9 @@ function beginTimer() {
             yourScore.addEventListener("click", checkScores);
 
         }
-    }, 1000);
+        return countdownTimer
+    }
+    timer = setInterval(countdownTimer(), 1000);
 };
 
 function beginQuiz() {
