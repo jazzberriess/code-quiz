@@ -67,7 +67,7 @@ let quizCorrectAnswer = theQuestions[index].correctAnswer;
 let visitHighScores = document.createElement("li");
 let trackScore = document.createElement("li");
 
-visitHighScores.innerHTML = "View High Scores";
+visitHighScores.innerHTML = "View  High Scores";
 trackScore.textContent = "Score: " + score;
 
 scoreTracker.appendChild(visitHighScores);

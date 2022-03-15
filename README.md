@@ -16,5 +16,10 @@ The following websites were invaluable in my quest for knowledge and troubleshoo
 
 [Stack Overflow: Score Counter](https://stackoverflow.com/questions/26125762/i-need-a-javascript-round-counter-and-score-counter-for-my-game_)
 
+[Stack Overflow: Checking if a Key exists](https://stackoverflow.com/questions/16010827/html5-localstorage-checking-if-a-key-exists)
+
 Mozilla Developer Network
 W3 Schools
+Class notes and recordings from Week 4
+Fellow classmates
+AskBCS

@@ -62,47 +62,6 @@ div.high-score-details {
     flex: 1 0 50%;
 }
 
-div.correct-incorrect {
-    border: 2px solid black;
-    width: 25%;
-    text-align: center;
-    
-}
-
-/* div.question-container {
-    Just so I can see the boxes
-    border: 2px solid aqua;
-    flex: 1 0 25%;
-    padding: 0.5rem;
-
-}
-
-
-div.enter-details{
-    Just so I can see the boxes
-    border: 2px solid aqua;
-    flex: 1 0 25%;
-    padding: 0.5rem;
-
-}
-
-div.quiz-completed {
-    Just so I can see the boxes
-    border: 2px solid aqua;
-    flex: 1 0 25%;
-    padding: 0.5rem;
-
-}
-
-
-div.high-score-details {
-    Just so I can see the boxes
-    border: 2px solid aqua;
-    flex: 1 0 25%;
-    padding: 0.5rem;
-
-} */
-
 /* flexbox and styling for the timer */
 
 div.timer {
@@ -175,6 +134,11 @@ button#start-quiz {
 
 button#start-quiz:hover {
     font-size: 1.6rem;
+}
+
+footer {
+    text-align: center;
+    font-weight: 200;
 }
 
 @media screen and (max-width: 992px) {
