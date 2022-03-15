@@ -14,12 +14,17 @@ let quizCompletedMessage = document.querySelector(".quiz-completed");
 
 let highScoreDetails = document.querySelector(".high-score-details");
 
+let correctMessage = document.querySelector(".correct");
+let incorrectMessage = document.querySelector(".incorrect");
+
+
 let score = 0;
 let index = 0;
 let i = 0;
 
 let timeLeft = 60;
 let deduction = 5;
+
 
 //setting the questions
 
@@ -68,63 +73,36 @@ trackScore.textContent = "Score: " + score;
 scoreTracker.appendChild(visitHighScores);
 scoreTracker.appendChild(trackScore);
 
-visitHighScores.setAttribute("style", "flex: 1 0 25%; text-align: left; margin: 0%; padding-left: 1rem; background-color: mistyrose");
+visitHighScores.setAttribute("style", "flex: 1 0 25%; text-align: left; margin: 0%; padding-left: 1rem; background-color: mistyrose; text-decoration: underline;");
 trackScore.setAttribute("style", "flex: 1 0 25%; text-align: right; margin: 0%; padding-right: 1rem; background-color: mistyrose");
+
+
+
+
+let feedbackCorrect = document.createElement("li");
+feedbackCorrect.setAttribute("style", "text-align: center; width: 60%; list-style: none;")
+feedbackCorrect.textContent = "Correct!";
+correctMessage.appendChild(feedbackCorrect);
+
+let feedbackIncorrect = document.createElement("li");
+feedbackIncorrect.setAttribute("style", "text-align: center; width: 60%; list-style: none;")
+feedbackIncorrect.textContent = "Incorrect!";
+incorrectMessage.appendChild(feedbackIncorrect);
 
 //hide the question container when viewing the game for the first time
 
 questionContainer.style.display = "none";
 quizCompletedMessage.style.display = "none";
+enterDetails.style.display = "none";
+// timerContainer.style.display = "none";
+highScoreDetails.style.display = "none";
+splashPage.style.display = "block";
+correctMessage.style.display = "none";
+incorrectMessage.style.display = "none";
 
 //start button begins timer
 
-function beginTimer() {
 
-    // function countdown() {
-    let timer;
-    //count how many seconds remain
-    timer = setInterval(function () {
-
-        //if time left is greater than 1, count down and display tramining time.
-
-        if (timeLeft > 1) {
-            timerCount.textContent = timeLeft--;
-
-            //if time left is 1 second, change the word 'seconds' to 'second'
-        }
-        else if (timeLeft === 1) {
-            timerCount.textContent = timeLeft--;
-            seconds.textContent = "second";
-
-            //if time left is zero, clear the counter
-        } else if
-            (index >= theQuestions.length) {
-            clearInterval(timer);
-
-        } else {
-            timerCount.textContent = "0";
-            seconds.textContent = "seconds";
-            clearInterval(timer);
-
-            //clear the question area and say 'Time Up!'
-            questionContainer.innerHTML = "";
-            let timeUp = document.createElement("h3");
-            timeUp.textContent = "TIME UP!";
-            questionContainer.append(timeUp);
-
-            // give user a button to check their score
-            let yourScore = document.createElement("button");
-            yourScore.textContent = "Save Your Score";
-            questionContainer.append(yourScore);
-
-            //styling for find out score button
-            yourScore.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem");
-
-            yourScore.addEventListener("click", checkScores);
-
-        }
-    }, 1000);
-};
 
 // startButton.addEventListener("click", function () {
 
@@ -137,8 +115,8 @@ function beginTimer() {
 function askQuestions() {
 
     //clear text area and hide initial info box
-
     questionContainer.innerHTML = "";
+
 
     splashPage.style.display = "none";
     questionContainer.style.display = "block";
@@ -149,6 +127,7 @@ function askQuestions() {
 
         quizCompletedMessage.style.display = "block";
         questionContainer.style.display = "none";
+
 
         let complete = document.createElement("h2");
         complete.textContent = "COMPLETE!"
@@ -219,23 +198,29 @@ function checkAnswers(event) {
     //if answer correct, state 'correct!' and move to next question
 
     if (value === "true") {
+        correctMessage.style.display = "block";
+        incorrectMessage.style.display = "none";
         console.log("You got it!");
         score++;
         trackScore.innerHTML = "Score: " + score;
 
-        // let feedbackCorrect = document.createElement("h1");
-        // feedbackCorrect.textContent = "Correct!";
-        // questionContainer.appendChild(feedbackCorrect);
+
 
         nextQuestion();
 
         // if answer incorrect, state 'wrong', deduct 10 seconds from timer and move to next question
     } else if (value === "false") {
         console.log("boooo!");
-        // let feedbackInorrect = document.createElement("h1");
-        // feedbackInorrect.textContent = "Incorrect!";
-        // questionContainer.appendChild(feedbackInorrect);
+
+        incorrectMessage.style.display = "block";
+        correctMessage.style.display = "none";
+
+        // let feedbackIncorrect = document.createElement("li");
+        // feedbackIncorrect.textContent = "Incorrect!";
+        // correctMessage.appendChild(feedbackIncorrect);
+        // feedbackIncorrect.setAttribute("style", "display: inline-block; align-self: flex-end;");
         timeLeft = timeLeft - deduction;
+
         nextQuestion();
     }
 }
@@ -243,12 +228,19 @@ function checkAnswers(event) {
 //if the index of theQuestions is less than the length of the object, ask the next question
 function nextQuestion() {
 
+    // correctMessage.style.display = "none";
+    // incorrectMessage.style.display = "none";
+
     if (index <= theQuestions.length) {
         index++;
+        // correctMessage.innerHTML = "";
         askQuestions();
     } else {
 
         // reset index to zero after game
+        // correctMessage.innerHTML = "";
+
+
         index = 0;
 
         console.log("COMPLETE");
@@ -259,7 +251,8 @@ function checkScores() {
 
     //clear the text field
     // questionContainer.innerHTML = "";
-
+    correctMessage.style.display = "none";
+    incorrectMessage.style.display = "none";
     quizCompletedMessage.style.display = "none";
     questionContainer.style.display = "none";
     timerContainer.style.display = "none";
@@ -300,7 +293,7 @@ function checkScores() {
 
         savePlayerName();
         showPlayerDetails();
-        questionContainer.style.display = "none";
+        // questionContainer.style.display = "none";
 
     })
 }
@@ -336,9 +329,10 @@ function showPlayerDetails() {
     var playerData = JSON.parse(localStorage.getItem("Player Details"));
 
     var displayData = document.createElement("div");
+    displayData.setAttribute("id", "display-data");
     displayData.textContent = "Name: " + playerData.playerName + " - Score: " + playerData.playerScore;
     highScoreDetails.appendChild(displayData);
-    displayData.setAttribute("style", "background-color: mistyrose; margin-bottom: 2rem;")
+    displayData.setAttribute("style", "background-color: mistyrose; margin-bottom: 2rem; margin-left: 0rem; margin-right: 0rem;")
 
     var goBackBtn = document.createElement("button");
     goBackBtn.textContent = "Go Back";
@@ -346,7 +340,7 @@ function showPlayerDetails() {
 
     //styling for the goBackBtn
 
-    goBackBtn.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem; mrgin-top: 1rem;");
+    goBackBtn.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem; mrgin-top: 1rem; margin-right: 1rem;");
 
     goBackBtn.addEventListener("click", function () {
         splashPage.style.display = "block";
@@ -381,21 +375,33 @@ function showPlayerDetails() {
 visitHighScores.addEventListener("click", function () {
     console.log("click");
 
+    highScoreDetails.innerHTML = "";
+
     if (localStorage.getItem("Player Details") === null) {
         let noSavedData = document.createElement("h2");
         noSavedData.textContent = "No Saved Data";
-        questionContainer.appendChild(noSavedData);
-        questionContainer.style.display = "block";
+        highScoreDetails.appendChild(noSavedData);
+        highScoreDetails.style.display = "block";
+        questionContainer.style.display = "none";
         timerContainer.style.display = "none";
         splashPage.style.display = "none";
 
         let returnBtn = document.createElement("button");
         returnBtn.textContent = "Return to Quiz";
-        questionContainer.appendChild(returnBtn);
+        highScoreDetails.appendChild(returnBtn);
 
-        //styling for the goBackBtn
+        // styling for the goBackBtn
 
         returnBtn.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem; mrgin-top: 1rem;");
+
+        returnBtn.addEventListener("click", function () {
+
+            splashPage.style.display = "block";
+            timerContainer.style.display = "block";
+            highScoreDetails.style.display = "none";
+
+        })
+
     } else {
         showPlayerDetails();
         splashPage.style.display = "none";
@@ -414,13 +420,61 @@ visitHighScores.addEventListener("click", function () {
 // console.log(userDetails);
 
 // }
+function beginTimer() {
 
+
+    // function countdown() {
+    let timer;
+    //count how many seconds remain
+    timer = setInterval(function () {
+
+        //if time left is greater than 1, count down and display tramining time.
+
+        if (timeLeft > 1) {
+            timerCount.textContent = timeLeft--;
+
+            //if time left is 1 second, change the word 'seconds' to 'second'
+        }
+        else if (timeLeft === 1) {
+            timerCount.textContent = timeLeft--;
+            seconds.textContent = "second";
+
+            //if time left is zero, clear the counter
+        } else if
+            (index >= theQuestions.length) {
+            clearInterval(timer);
+
+        } else {
+            timerCount.textContent = "0";
+            seconds.textContent = "seconds";
+            clearInterval(timer);
+
+            //clear the question area and say 'Time Up!'
+            questionContainer.innerHTML = "";
+            let timeUp = document.createElement("h3");
+            timeUp.textContent = "TIME UP!";
+            questionContainer.append(timeUp);
+
+            // give user a button to check their score
+            let yourScore = document.createElement("button");
+            yourScore.textContent = "Save Your Score";
+            questionContainer.append(yourScore);
+
+            //styling for find out score button
+            yourScore.setAttribute("style", "background-color: pink; font-size: 1.5rem; font-family: inherit; border: 2px solid palevioletred; border-radius: 1.5rem; padding: 1rem");
+
+            yourScore.addEventListener("click", checkScores);
+
+        }
+    }, 1000);
+};
 
 function beginQuiz() {
     // let scoreTrackerContents = document.createElement("h1");
     // scoreTrackerContents.textContent = "Score: " + currentScore;
     // scoreTracker.appendChild(scoreTrackerContents);
     // score = 0;
+    // timeLeft = 60;
 
     beginTimer();
 
@@ -451,6 +505,8 @@ function gameReset() {
     enterDetails.innerHTML = "";
     quizCompletedMessage.innerHTML = "";
     highScoreDetails.innerHTML = "";
+    //had to add this because the scoreTracker wouldn't reset otherwise???
+    trackScore.innerHTML = "Score: " + score;
 }
 
 

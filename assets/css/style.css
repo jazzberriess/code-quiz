@@ -5,6 +5,7 @@ body {
     line-height: 2rem;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     width: 100%;
+    margin: 0;
     
 }
 
@@ -17,75 +18,96 @@ hr {
     width: 75%;
 }
 
-/* navigation styling and flex box*/
+/* 'navigation bar' styling and flex box*/
 
 ul {
     list-style: none;
     padding: 0rem;
 }
 
-/* li {
-    display: inline;
-    
-} */
+
 ul.li-wrapper {
-    border: 1px solid blueviolet;
+    /* Just so I can see the boxes */
+    /* border: 1px solid blueviolet; */
     display: flex;
     justify-content:space-evenly;
-    /* padding-left: 0.5rem;
-    padding-right: 0.5rem; */
+
 
 }
-
-/* li.li-flex-1 {
-    display: inline;
-    border: 1px solid black;
-    flex: 1 0 50%;
-    text-align: left;
-}
-
-li.li-flex-2 {
-    display: inline;
-    border: 1px solid limegreen;
-    flex: 1 0 50%;
-    text-align: right;
-} */
 
 div.flex-container {
     display: flex;
-    border: 2px solid red;
+    /* Just so I can see the boxes */
+    /* border: 2px solid red; */
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: stretch;
     text-align: center;
+    height: 100%;
+    padding-bottom: 2rem;
+    border-top: 2px solid palevioletred;
+    border-bottom: 2px solid palevioletred;
 }
 
-div.splash-page {
-    border: 2px solid blue;
-    flex: 1 0 25%;
+div.splash-page, .question-container, .enter-details, .quiz-completed {
+    /* Just so I can see the boxes */
+    /* border: 2px solid blue; */
+    flex: 1 0 50%;
     padding: 0.5rem;
 
 }
 
-div.question-container {
+div.high-score-details {
+    flex: 1 0 50%;
+}
+
+div.correct-incorrect {
+    border: 2px solid black;
+    width: 25%;
+    text-align: center;
+    
+}
+
+/* div.question-container {
+    Just so I can see the boxes
     border: 2px solid aqua;
     flex: 1 0 25%;
     padding: 0.5rem;
 
 }
 
-/* div.decorative-separator {
-    height: 1px;
-    background-color: blue;
-    flex: 1 0 50%;
-    
+
+div.enter-details{
+    Just so I can see the boxes
+    border: 2px solid aqua;
+    flex: 1 0 25%;
+    padding: 0.5rem;
+
+}
+
+div.quiz-completed {
+    Just so I can see the boxes
+    border: 2px solid aqua;
+    flex: 1 0 25%;
+    padding: 0.5rem;
+
+}
+
+
+div.high-score-details {
+    Just so I can see the boxes
+    border: 2px solid aqua;
+    flex: 1 0 25%;
+    padding: 0.5rem;
+
 } */
 
 /* flexbox and styling for the timer */
 
 div.timer {
-    border: 2px solid green;
+    /* Just so I can see the boxes */
+    /* border: 2px solid green; */
     flex: 1 0 25%;
     display: flex;
     flex-direction: column;
@@ -96,7 +118,8 @@ div.timer {
 }
 
 div.timer-text {
-    border: 1px solid yellow;
+    /* Just so I can see the boxes */
+    /* border: 1px solid yellow; */
     flex: 1 0 100%;
     display: flex;
     flex-wrap: wrap;
@@ -127,7 +150,8 @@ circle {
 
 
 div.time-left {
-    border: 2px solid orange;
+    /* Just so I can see the boxes */
+    /* border: 2px solid orange; */
     background-color: pink;
     flex: 1 0 33%;
     border-radius: 50%;
@@ -155,7 +179,8 @@ button#start-quiz:hover {
 
 @media screen and (max-width: 992px) {
     div.questions {
-        border: 2px solid blue;
+        /* Just so I can see the boxes */
+        /* border: 2px solid blue; */
         flex: 1 0 25%;
         padding: 0.5rem;
     
@@ -164,7 +189,8 @@ button#start-quiz:hover {
     /* flexbox and styling for the timer */
     
     div.timer {
-        border: 2px solid green;
+        /* Just so I can see the boxes */
+        /* border: 2px solid green; */
         flex: 1 0 25%;
         display: flex;
         flex-direction: column;
@@ -178,7 +204,8 @@ button#start-quiz:hover {
 
 @media screen and (max-width: 768px) {
     div.questions {
-        border: 2px solid blue;
+        /* Just so I can see the boxes */
+        /* border: 2px solid blue; */
         flex: 1 0 100%;
         padding: 0.5rem;
     }
@@ -186,7 +213,8 @@ button#start-quiz:hover {
     /* flexbox and styling for the timer */
     
     div.timer {
-        border: 2px solid green;
+        /* Just so I can see the boxes */
+        /* border: 2px solid green; */
         flex: 1 0 100%;
         display: flex;
         flex-direction: column;
