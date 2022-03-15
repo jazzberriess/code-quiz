@@ -32,8 +32,8 @@ ul.li-wrapper {
     border: 1px solid blueviolet;
     display: flex;
     justify-content:space-evenly;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    /* padding-left: 0.5rem;
+    padding-right: 0.5rem; */
 
 }
 
@@ -61,7 +61,7 @@ div.flex-container {
     text-align: center;
 }
 
-div.questions {
+div.splash-page {
     border: 2px solid blue;
     flex: 1 0 25%;
     padding: 0.5rem;

@@ -24,19 +24,21 @@
 
         <section>
             <div class="flex-container">
-                <div class="questions">
-                    <h1 id="codequiz">Code Quiz</h1>
-                    <div class="answer-section">
-                        <p>Test your skills with this Code Quiz!</p>
-                        <p>Try to beat the timer and get the highest score. Incorrect answers will <span
-                                id="decrease">decrease</span> the time an extra 10
-                            seconds.</p>
-                        <p>Good luck!</p>
-                        <button id="start-quiz">Start Quiz</button>
-                    </div>
+                <div class="splash-page">
+                    <h1>Code Quiz</h1>
+                    <!-- <div class="answer-section"> -->
+                    <p>Test your skills with this Code Quiz!</p>
+                    <p>Try to beat the timer and get the highest score. Incorrect answers will <span
+                            id="decrease">decrease</span> the time an extra 10
+                        seconds.</p>
+                    <p>Good luck!</p>
+                    <button id="start-quiz">Start Quiz</button>
+                    <!-- </div> -->
                 </div>
                 <div class="question-container"></div>
+                <div class="enter-details"></div>
                 <div class="quiz-completed"></div>
+                <div class="high-score-details"></div>
                 <div class="timer">
                     <div class="timer-text">
 
@@ -44,7 +46,7 @@
 
                         <svg aria-hidden="true">
                             <circle id="timer-background" cx="50%" cy="50%" r="68" />
-                            <text x="50%" y="58%" class="timer-count">60</text>
+                            <text x="50%" y="58%" class="timer-count"></text>
                         </svg>
 
                         <p id="seconds">seconds</p>
