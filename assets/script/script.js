@@ -145,6 +145,7 @@ function askQuestions() {
         let complete = document.createElement("h2");
         complete.textContent = "COMPLETE!"
         quizCompletedMessage.appendChild(complete);
+        complete.setAttribute("style", "margin: 1rem;")
 
         //set timer to zero and reset question index to zero
         timeLeft = 0;
@@ -153,6 +154,7 @@ function askQuestions() {
         //create 'go to scores' button
 
         let goToScores = document.createElement("button");
+        goToScores.setAttribute("id", "button-hover");
         goToScores.textContent = "Show Score";
         quizCompletedMessage.appendChild(goToScores);
 
@@ -183,6 +185,7 @@ function askQuestions() {
 
         //create buttons for the answer options
         let answerOptions = document.createElement("button");
+        answerOptions.setAttribute("id", "button-hover");
 
         answerOptions.textContent = quizAnswers[i];
         questionContainer.appendChild(answerOptions);
@@ -275,12 +278,15 @@ function checkScores() {
     yourInitialsInput.setAttribute("id", "inputFieldName");
     yourInitialsInput.textContent = "";
     enterDetails.appendChild(yourInitialsInput);
+    yourInitialsInput.setAttribute("style", "margin: 1.5rem;")
+
 
     //display final score
 
     let yourScore = document.createElement("h3");
     yourScore.innerHTML = "Your Score: " + score;
     enterDetails.appendChild(yourScore);
+    yourScore.setAttribute("style", "margin: 1rem;")
 
     //save name and score details
 
@@ -288,6 +294,7 @@ function checkScores() {
     submit.textContent = "Submit";
     submit.setAttribute("type", "submit");
     submit.setAttribute("id", "submit");
+    submit.setAttribute("id", "button-hover");
     enterDetails.appendChild(submit);
 
     //styling for the submit button
@@ -326,9 +333,10 @@ function showPlayerDetails() {
     enterDetails.style.display = "none";
     highScoreDetails.style.display = "block";
 
-    let highScoresTitle = document.createElement("h3");
+    let highScoresTitle = document.createElement("h2");
     highScoresTitle.textContent = "High Scores";
     highScoreDetails.appendChild(highScoresTitle);
+    highScoresTitle.setAttribute("style", "margin: 1.5rem;")
 
     //retrieve and display data that was saved in local storage
 
@@ -345,6 +353,7 @@ function showPlayerDetails() {
     //create a go back button
 
     var goBackBtn = document.createElement("button");
+    goBackBtn.setAttribute("id", "button-hover");
     goBackBtn.textContent = "Go Back";
     highScoreDetails.appendChild(goBackBtn);
 
@@ -369,6 +378,7 @@ function showPlayerDetails() {
 
     //clear scores
     var clearScoresBtn = document.createElement("button");
+    clearScoresBtn.setAttribute("id", "button-hover");
     clearScoresBtn.textContent = "Clear Score";
     highScoreDetails.appendChild(clearScoresBtn);
 
@@ -408,6 +418,7 @@ visitHighScores.addEventListener("click", function () {
         //create a return to quiz button
 
         let returnBtn = document.createElement("button");
+        returnBtn.setAttribute("id", "button-hover");
         returnBtn.textContent = "Return to Quiz";
         highScoreDetails.appendChild(returnBtn);
 
@@ -483,6 +494,7 @@ function beginTimer() {
             // give user a button to check their score
 
             let yourScore = document.createElement("button");
+            yourScore.setAttribute("id", "button-hover");
             yourScore.textContent = "Save Your Score";
             questionContainer.append(yourScore);
 

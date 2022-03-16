@@ -13,13 +13,18 @@ body {
     
 }
 
-p #decrease {
-    font-weight: 800;
+h1 {
+    font-size: 2.3rem;
+    margin-bottom: 1.5rem;
 }
 
-hr {
-    align: center;
-    width: 75%;
+h2 {
+    font-size: 1.7rem;
+    margin-bottom: 1.5rem;
+}
+
+p #decrease {
+    font-weight: 800;
 }
 
 /* 'navigation bar' styling and flex box*/
@@ -150,6 +155,15 @@ button#start-quiz {
 
 button#start-quiz:hover {
     font-size: 1.6rem;
+    background-color: mistyrose;
+
+}
+
+/* adding hover to the dynamically added buttons */
+
+div button#button-hover:hover {
+    font-size: 1.6rem !important;
+    background-color: mistyrose !important;
 }
 
 footer {
