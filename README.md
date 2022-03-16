@@ -59,4 +59,4 @@ The following websites were invaluable in my quest for knowledge and troubleshoo
 
 MIT License
 
-Copyright (c) 2022 Christi Scappatura
+Copyright © 2022 Christi Scappatura

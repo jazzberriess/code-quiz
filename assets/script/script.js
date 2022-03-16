@@ -424,10 +424,14 @@ visitHighScores.addEventListener("click", function () {
             splashPage.style.display = "block";
             timerContainer.style.display = "block";
             highScoreDetails.style.display = "none";
+            gameReset();
 
         })
 
+
     } else {
+
+        highScoreDetails.innerHTML = "";
 
         //show player details and hide all other containers
         showPlayerDetails();
