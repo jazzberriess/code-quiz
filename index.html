@@ -5,61 +5,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/assets/css/reset.css" rel="stylesheet">
+    <link href="assets/css/reset.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <title>Document</title>
 </head>
-<header>
-    <nav class>
-        <ul class="li-wrapper">
-            <li class="li-flex-1">View High Scores</li>
-            <li class="li-flex-2">Quit</li>
-        </ul>
-    </nav>
-</header>
 
-<main>
+<body>
+    <header>
+        <div class="li-wrapper"></div>
+    </header>
 
-    <body>
+    <main>
+
+
         <section>
             <div class="flex-container">
-                <div class="questions">
+                <div class="feedback-container">
+                    <div class="correct"></div>
+                    <div class="incorrect"></div>
+                </div>
+                <div class="splash-page">
                     <h1>Code Quiz</h1>
+                    <!-- <div class="answer-section"> -->
                     <p>Test your skills with this Code Quiz!</p>
                     <p>Try to beat the timer and get the highest score. Incorrect answers will <span
                             id="decrease">decrease</span> the time an extra 10
                         seconds.</p>
                     <p>Good luck!</p>
                     <button id="start-quiz">Start Quiz</button>
-
-
+                    <!-- </div> -->
                 </div>
-                <div class="question-container">
-                    <h1 class="question-title"></h1>
-                    <div class="answer-section">
-                    </div>
-                </div>
+
+                <div class="question-container"></div>
+                <div class="enter-details"></div>
+                <div class="quiz-completed"></div>
+                <div class="high-score-details"></div>
                 <div class="timer">
                     <div class="timer-text">
 
                         <h3>Time Left: </h3>
 
                         <svg aria-hidden="true">
-                            <circle cx="50%" cy="50%" r="68" />
-                            <text x="50%" y="58%" class="timer-count">10</text>
+                            <circle id="timer-background" cx="50%" cy="50%" r="68" />
+                            <text x="50%" y="58%" class="timer-count"></text>
                         </svg>
 
                         <p id="seconds">seconds</p>
 
                     </div>
                 </div>
-            </div>
-        </section>
-</main>
-<footer>
 
-</footer>
-<script src="./assets/script/script.js"></script>
+            </div>
+
+        </section>
+    </main>
+    <footer>
+        <h4>&copy; Christi Scappatura 2022</h4>
+    </footer>
+    <script src="./assets/script/script.js"></script>
 </body>
 
 </html>

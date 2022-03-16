@@ -1,4 +1,8 @@
 /* styling for body and text elements in the body */
+* {
+    box-sizing: border-box;
+}
+
 
 body {
     font-size: 1.5rem;
@@ -20,20 +24,17 @@ hr {
 
 /* 'navigation bar' styling and flex box*/
 
-ul {
-    list-style: none;
-    padding: 0rem;
-}
-
-
-ul.li-wrapper {
+div.li-wrapper {
     /* Just so I can see the boxes */
     /* border: 1px solid blueviolet; */
     display: flex;
     justify-content:space-evenly;
+    line-height: 3rem;
 
 
 }
+
+/* //and now for the flexboxes for the questions and text-content! */
 
 div.flex-container {
     display: flex;
@@ -50,10 +51,17 @@ div.flex-container {
     border-bottom: 2px solid palevioletred;
 }
 
+div.feedback-container {
+    flex: 1 0 100%;
+    min-height: 2.5rem;
+    margin-bottom: 1rem;
+    padding-top: 0.5rem;
+}
+
 div.splash-page, .question-container, .enter-details, .quiz-completed {
     /* Just so I can see the boxes */
     /* border: 2px solid blue; */
-    flex: 1 0 50%;
+    flex: 1 0 40%;
     padding: 0.5rem;
 
 }
@@ -73,6 +81,7 @@ div.timer {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    padding: 1.5rem;
   
 }
 
@@ -90,12 +99,18 @@ div.timer-text {
 
 div.timer-text h3 {
     font-size: 2rem;
+    margin-bottom: 1rem;
 }
 
 div.timer-text p {
     font-size: 2rem;
+    margin-top: 1rem;
 }
 
+/* // because the svg tag was doing weird things to the layout unless this was here*/
+svg {
+    width: 100%;
+}
 circle {
     fill: pink;
     stroke: palevioletred;
@@ -125,6 +140,7 @@ button#start-quiz {
     border: 2px ridge palevioletred;
     box-shadow: 0rem 0rem 0.2rem palevioletred;
    background-color: pink;
+   margin-top: 2rem;
    padding-top: 0.5rem;
    padding-left: 1.5rem;
    padding-bottom: 0.5rem;
@@ -137,9 +153,12 @@ button#start-quiz:hover {
 }
 
 footer {
+    padding: 2rem;
     text-align: center;
     font-weight: 200;
 }
+
+/* //media queries for smaller sreens */
 
 @media screen and (max-width: 992px) {
     div.questions {
