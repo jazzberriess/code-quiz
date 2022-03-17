@@ -278,7 +278,7 @@ function checkScores() {
     yourInitialsInput.setAttribute("id", "inputFieldName");
     yourInitialsInput.textContent = "";
     enterDetails.appendChild(yourInitialsInput);
-    yourInitialsInput.setAttribute("style", "margin: 1.5rem;")
+    // yourInitialsInput.setAttribute("style", "margin: 1.5rem; border-radius: 1.5rem; border-color: palevioletred;")
 
 
     //display final score

@@ -166,6 +166,17 @@ div button#button-hover:hover {
     background-color: mistyrose !important;
 }
 
+input {
+    padding: 0.2rem;
+    padding-left: 1rem;
+    margin: 1.5rem !important;
+    border-radius: 1.5rem !important;
+    border-color: palevioletred !important;
+    box-shadow: 0rem 0rem 0.3rem palevioletred !important;
+    background-color: mistyrose !important;
+
+}
+
 footer {
     padding: 2rem;
     text-align: center;
