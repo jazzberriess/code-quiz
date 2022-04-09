@@ -2,27 +2,45 @@
 
 ## Description
 
-A short code quiz designed to test our knowledge of JavaScript and Web API's.
+A short interactive code quiz designed to test your knowledge of JavaScript and Web API's.
 
-This project was mainly focused on further building skills in JavaScript and expanding our skillset into learning about Web API's. We learned how to make dynamic designs that are interactive for a more engaging user experience.
-
-I found this project to be quite a challenge as JavaScript is taking me a little longer to grasp compared to HTML and CSS. I think the most challenging part is learning how to think computationally to solve problems as the come up. 
-
-I do, however, feel that I've improved (at least a little!) upon my JavaScript abilities compared to the last project.
+Users have 60 seconds to answer 6 questions relating to JavaScript and Web API's. Incorrect answers give you a time penalty. The game is over when you either run out of time or complete the questions.
 
 ---
 
 ## Usage
-View deployed application on [GitHub Pages](https://jazzberriess.github.io/wk-04-code-quiz/)
+View deployed application on [GitHub Pages](https://jazzberriess.github.io/code-quiz/)
 
-Link to the [GitHub repo](https://github.com/jazzberriess/wk-04-code-quiz)
+Link to the [GitHub repo](https://github.com/jazzberriess/code-quiz)
 
-Built using HTML, CSS and JavaScript.
+
+## Technologies Used
+Built using: 
+* HTML
+* CSS
+* JavaScript
+* localStorage Web API
 
 ---
 
 ## Demo
-![Final design demo](./assets/images/wk-04-code-quiz-demo.gif)
+![Final design demo](./assets/images/code-quiz-demo.gif)
+
+---
+
+![Screenshot of main splash page](./assets/images/code-quiz-splash-page.png)
+
+---
+
+![Screenshot of questions](./assets/images/code-quiz-questions.png)
+
+---
+
+![Screenshot of complete page](./assets/images/code-quiz-complete.png)
+
+---
+
+![Screenshot of score page](./assets/images/code-quiz-score-page.png)
 
 ---
 
@@ -47,16 +65,14 @@ The following websites were invaluable in my quest for knowledge and troubleshoo
 
 * [W3 Schools](https://www.w3schools.com/js/)
 
-* Class notes and recordings from Week 4
-
-* Fellow classmates, instructor and TA's
-
-* AskBCS
-
 ---
 
 ## License
 
 MIT License
 
-Copyright © 2022 Christi Scappatura
+&copy; 2022 Christi Scappatura
+
+## Contact
+
+[Christi on GitHub](https://github.com/jazzberriess)
